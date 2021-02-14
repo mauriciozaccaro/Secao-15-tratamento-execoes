@@ -5,9 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
-//import jdk.internal.net.http.ResponseTimerEvent;
-import model.entities.Reservation;
-import model.entities.Reservation_Ruim;
+import model.entities.Reservation_Boa;
+import model.exceptions.DomainException;
 
 public class Solucao_Boa {
 
@@ -25,7 +24,7 @@ public class Solucao_Boa {
 			System.out.print("Check-Out Date (dd/MM/yyyy): ");
 			Date checkOut = sdf.parse(sc.next());
 		
-			Reservation_Ruim reservation = new Reservation_Ruim(number, checkIn, checkOut);
+			Reservation_Boa reservation = new Reservation_Boa(number, checkIn, checkOut);
 			System.out.println("Reservation: " + reservation );
 			System.out.println();
 			
@@ -42,7 +41,7 @@ public class Solucao_Boa {
 		catch(ParseException e) {
 			System.out.println("Invalid Date format!");
 		}
-		catch(IllegalArgumentException e) {
+		catch(DomainException e) {
 			System.out.println("Error in Reservation: " + e.getMessage());
 		}
 		
