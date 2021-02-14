@@ -1,14 +1,15 @@
 package application;
 
-import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 //import jdk.internal.net.http.ResponseTimerEvent;
 import model.entities.Reservation;
+import model.entities.Reservation_Ruim;
 
-public class Solucao_Muito_Ruim {
+public class Solucao_Ruim {
 
 	public static void main(String[] args) throws ParseException {
 		
@@ -28,7 +29,7 @@ public class Solucao_Muito_Ruim {
 			System.out.println("Error in reservation: Data de CheckIn maior que de CheckOut");
 		}
 		else { 
-			Reservation reservation = new Reservation(number, checkIn, checkOut);
+			Reservation_Ruim reservation = new Reservation_Ruim(number, checkIn, checkOut);
 			System.out.println("Reservation: " + reservation );
 			System.out.println();
 			
@@ -38,15 +39,13 @@ public class Solucao_Muito_Ruim {
 			System.out.print("Check-Out Date (dd/MM/yyyy): ");
 			checkOut = sdf.parse(sc.next());
 			
-			Date now = new Date();
 			
-			if(checkIn.before(now) || checkOut.before(now)) {
-				System.out.println("Error in reservation: Reservation dates for update must be future dates");
-			}else if(!checkOut.after(checkIn)) {
-				System.out.println("Error in reservation: Data de CheckIn maior que de CheckOut");
+			String error = reservation.updateDates(checkIn, checkOut);
+			
+			if(error != null) {
+				System.out.println("Error in Reservation: " + error);
 			}else {
-				reservation.updateDates(checkIn, checkOut);
-				System.out.println("Reservation: " + reservation );
+			System.out.println("Reservation: " + reservation );
 			}
 			
 			//System.out.println("Reservation: " + reservation );
